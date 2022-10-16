@@ -1,4 +1,3 @@
-from enum import unique
 from django.db import models
 
 # Create your models here.
@@ -6,7 +5,7 @@ from django.db import models
 
 class Artist(models.Model):
     Stage_name = models.CharField(max_length=100, blank=False, unique=True)
-    Social_link = models.CharField(max_length=150, blank=True, null=False)
+    Social_link = models.URLField(max_length=150, blank=True, null=False)
 
     def __str__(self):
         return self.Stage_name
