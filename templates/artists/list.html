@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Create</title>
+    </head>
+    <body>
+        <div>
+            <ul>
+                {% for artist in data %}
+                <ul>
+                        <li>id : {{artist.id}}</li>
+                        <li>stage_name : {{artist.Stage_name}}</li>
+                        <li>social_link : {{artist.Social_link}}</li>
+                        <li>albums :
+                            <ul>
+                                {% for album in artist.albums %}
+                                    <ul>
+                                        <li>id : {{album.id}}</li>
+                                        <li>name : {{album.name}}</li>
+                                        <li>creation_date : {{album.creation_datetime}}</li>
+                                        <li>release _ date : {{album.release_datetime}}</li>
+                                        <li>cost : {{album.cost}}</li>
+                                        <li>approved : {{album.approved}}</li>
+                                    </ul>
+                                    <br>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                </ul>
+                {% endfor %}
+            </ul>
+        </div>
+    </body>
+</html>
