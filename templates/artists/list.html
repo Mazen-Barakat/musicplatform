@@ -1,34 +1,23 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Create</title>
-    </head>
-    <body>
-        <div>
-            <ul>
-                {% for artist in data %}
-                <ul>
-                        <li>id : {{artist.id}}</li>
-                        <li>stage_name : {{artist.Stage_name}}</li>
-                        <li>social_link : {{artist.Social_link}}</li>
-                        <li>albums :
-                            <ul>
-                                {% for album in artist.albums %}
-                                    <ul>
-                                        <li>id : {{album.id}}</li>
-                                        <li>name : {{album.name}}</li>
-                                        <li>creation_date : {{album.creation_datetime}}</li>
-                                        <li>release _ date : {{album.release_datetime}}</li>
-                                        <li>cost : {{album.cost}}</li>
-                                        <li>approved : {{album.approved}}</li>
-                                    </ul>
-                                    <br>
-                                {% endfor %}
-                            </ul>
-                        </li>
-                </ul>
-                {% endfor %}
-            </ul>
-        </div>
-    </body>
-</html>
+<h3>Artists:</h3>
+<ul>
+    {% for artist in data %}
+        <li>ID: {{ artist.id }}</li>
+        <li>Stage Name:{{ artist.Stage_name }}</li>
+        <li>Social Link:{{ artist.Social_link }}</li>
+        <h3>Albums: </h3>
+        <ul>
+            {% for album in artist.album_set.all %}
+                <li>ID: {{album.id}}</li>
+                <li>Name: {{album.name}}</li>
+                <li>creation_date : {{album.creation_datetime}}</li>
+                <li>Release Date: {{album.release_datetime}}</li>
+                <li>Cost: {{album.cost}}</li>
+                {% empty %}
+                <h5>No Albums</h5>
+            {% endfor %}
+        </ul>
+    {% empty %}
+        <li>Sorry, no athletes in this list. </li>
+    {% endfor %}
+</ul>
+
