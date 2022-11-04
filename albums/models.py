@@ -26,7 +26,7 @@ class Song(models.Model):
     name = models.CharField(verbose_name="name",max_length=100,blank=True,null=False)
     image = models.ImageField(upload_to='images/')
     thumb = ProcessedImageField(upload_to = 'thumbs/' , format='JPEG')
-    audio = models.FileField(upload_to = 'audio/', validators=[FileExtensionValidator( ['mp3','wav'] ) ])
+    audio = models.FileField(upload_to = 'audio/', validators=[FileExtensionValidator( allowed_extensions=['mp3', 'wav'] ) ])
     album = models.ForeignKey(Album,on_delete=models.CASCADE , default=None)
 
     def __str__(self):

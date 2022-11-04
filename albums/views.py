@@ -1,21 +1,20 @@
-from django.shortcuts import render
-from . import forms
-from django.views import View
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
-
-
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .serializers import AlbumSerializer
+from .models import Album
 # Create your views here.
-@method_decorator(login_required, name='dispatch')
-class create_view(View):
-    form_class = forms.CreateAlbumForm
 
-    def get(self, request , *args , **kwargs):
-        form = self.form_class()
-        return render(request, 'albums/create.html' , {'form': form})
-    
-    def post(self, request , *args , **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            form.save()
-        return render(request, 'albums/create.html' , {'form': form})
+
+class AlbumView(APIView):
+
+    def get(self, request):
+        serializer = AlbumSerializer(Album.objects.all(), many=True)
+        return Response(serializer.data, status=200)
+
+    def post(self, request):
+        serializer = AlbumSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        else:
+            return Response(serializer.errors, status=400)
