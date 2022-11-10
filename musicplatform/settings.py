@@ -41,6 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'imagekit',
     'rest_framework',
+    'model_utils',
+    'users',
+    'authentication',
+    'django_extensions',
+    'rest_framework.authtoken',
+    'knox',
 ]
 
 MIDDLEWARE = [
@@ -53,12 +59,16 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
+
+AUTH_USER_MODEL = 'users.User'
+
 ROOT_URLCONF = 'musicplatform.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -1,12 +1,10 @@
 from django import forms
 from . import models
-from .validator import validate_form
 
 class AlbumForm(forms.ModelForm):
     class Meta:
         model = models.Album
         fields = ['name', 'artist', 'release_datetime', 'cost', 'approved']
-        validators = [validate_form]
     
     
     def __init__(self, *args, **kwargs):
