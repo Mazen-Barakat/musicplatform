@@ -26,6 +26,7 @@ class LoginView(generics.CreateAPIView):
     def create(self, request):
         serializer = AuthTokenSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
+        serializer.validated_data[user]
         user = serializer.validated_data['user']
         _, knox_token = AuthToken.objects.create(user)
         return Response({"token": knox_token, "user": {"id": user.id, "username": user.username, "email": user.email, "bio": user.bio}}, status=200)
